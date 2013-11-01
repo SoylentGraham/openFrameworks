@@ -16,7 +16,7 @@ class ofColor_{
 		ofColor_<PixelType> (float _r, float _g, float _b, float _a = limit());
 		ofColor_<PixelType> (const ofColor_<PixelType> & color);
 		ofColor_<PixelType> (const ofColor_<PixelType> & color, float _a);
-		explicit ofColor_<PixelType> (float gray, float _a = limit());
+		ofColor_<PixelType> (float gray, float _a = limit());
 		
 		template<typename SrcType>
 		ofColor_<PixelType> (const ofColor_<SrcType> & color);
