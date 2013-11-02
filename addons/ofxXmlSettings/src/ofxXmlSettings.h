@@ -153,6 +153,7 @@ class ofxXmlSettings: public ofBaseFileSerializer{
 		TiXmlDocument 	doc;
 		bool 			bDocLoaded;
 
+		const TiXmlHandle&	getStoredHandle() const	{	return storedHandle;	}
 	protected:
 
 		TiXmlHandle     storedHandle;
