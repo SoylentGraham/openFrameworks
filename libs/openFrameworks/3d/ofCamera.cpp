@@ -133,7 +133,7 @@ float ofCamera::getImagePlaneDistance(ofRectangle viewport) const {
 }
 
 //----------------------------------------
-void ofCamera::begin(ofRectangle viewport) {
+void ofCamera::begin(ofRectangle viewport,ofRectangle OrthoViewport) {
 	if(!isActive) ofPushView();
 	isActive = true;
 
@@ -144,7 +144,7 @@ void ofCamera::begin(ofRectangle viewport) {
 	ofSetOrientation(ofGetOrientation(),vFlip);
 
 	ofSetMatrixMode(OF_MATRIX_PROJECTION);
-	ofLoadMatrix( getProjectionMatrix(viewport) );
+	ofLoadMatrix( getProjectionMatrix(viewport,OrthoViewport) );
 
 	ofSetMatrixMode(OF_MATRIX_MODELVIEW);
 	ofLoadMatrix( getModelViewMatrix() );
@@ -161,9 +161,11 @@ void ofCamera::end() {
 }
 
 //----------------------------------------
-ofMatrix4x4 ofCamera::getProjectionMatrix(ofRectangle viewport) const {
+ofMatrix4x4 ofCamera::getProjectionMatrix(ofRectangle viewport,ofRectangle OrthoViewport) const {
 	if(isOrtho) {
-		return ofMatrix4x4::newOrthoMatrix(0, viewport.width, 0, viewport.height, nearClip, farClip);
+		if ( OrthoViewport.isEmpty() )
+			OrthoViewport = viewport;
+		return ofMatrix4x4::newOrthoMatrix( OrthoViewport.getLeft(), OrthoViewport.getRight(), OrthoViewport.getBottom(), OrthoViewport.getTop(), nearClip, farClip);
 	}else{
 		float aspect = forceAspectRatio ? aspectRatio : viewport.width/viewport.height;
 		ofMatrix4x4 matProjection;
@@ -179,7 +181,7 @@ ofMatrix4x4 ofCamera::getModelViewMatrix() const {
 }
 
 //----------------------------------------
-ofMatrix4x4 ofCamera::getModelViewProjectionMatrix(ofRectangle viewport) const {
+ofMatrix4x4 ofCamera::getModelViewProjectionMatrix(ofRectangle viewport,ofRectangle OrthoViewport) const {
 	return getModelViewMatrix() * getProjectionMatrix(viewport);
 }
 

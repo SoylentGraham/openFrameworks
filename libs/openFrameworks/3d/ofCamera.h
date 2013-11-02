@@ -52,13 +52,13 @@ public:
 	float getImagePlaneDistance(ofRectangle viewport = ofGetCurrentViewport()) const;
 	
 	// set the matrices
-	virtual void begin(ofRectangle viewport = ofGetCurrentViewport());
+	virtual void begin(ofRectangle viewport = ofGetCurrentViewport(),ofRectangle OrthoViewport=ofRectangle());
 	virtual void end();
 	
 	// for hardcore peeps, access to the projection matrix
-	ofMatrix4x4 getProjectionMatrix(ofRectangle viewport = ofGetCurrentViewport()) const;
+	ofMatrix4x4 getProjectionMatrix(ofRectangle viewport = ofGetCurrentViewport(),ofRectangle OrthoViewport=ofRectangle()) const;
 	ofMatrix4x4 getModelViewMatrix() const;
-	ofMatrix4x4 getModelViewProjectionMatrix(ofRectangle viewport = ofGetCurrentViewport()) const;
+	ofMatrix4x4 getModelViewProjectionMatrix(ofRectangle viewport = ofGetCurrentViewport(),ofRectangle OrthoViewport=ofRectangle()) const;
 	
 	// convert between spaces
 	ofVec3f worldToScreen(ofVec3f WorldXYZ, ofRectangle viewport = ofGetCurrentViewport()) const;
