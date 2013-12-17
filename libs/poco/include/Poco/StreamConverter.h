@@ -108,7 +108,7 @@ protected:
 };
 
 
-class Foundation_API InputStreamConverter: public StreamConverterIOS, public std::istream
+class Foundation_API InputStreamConverter: public StreamConverterIOS//, public std::istream
 	/// This stream converts all characters read from the
 	/// underlying istream from one character encoding into another.
 	/// If a character cannot be represented in outEncoding, defaultChar
@@ -126,7 +126,7 @@ public:
 };
 
 
-class Foundation_API OutputStreamConverter: public StreamConverterIOS, public std::ostream
+class Foundation_API OutputStreamConverter: public StreamConverterIOS//, public std::ostream
 	/// This stream converts all characters written to the
 	/// underlying ostream from one character encoding into another.
 	/// If a character cannot be represented in outEncoding, defaultChar
