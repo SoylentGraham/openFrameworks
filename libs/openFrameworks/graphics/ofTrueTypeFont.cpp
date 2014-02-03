@@ -935,7 +935,7 @@ float ofTrueTypeFont::stringWidth(string c) {
 }
 
 
-ofRectangle ofTrueTypeFont::getStringBoundingBox(string c, float x, float y){
+ofRectangle ofTrueTypeFont::getStringBoundingBox(string c, float x, float y,bool includeSpaces){
 
     ofRectangle myRect;
 
@@ -964,14 +964,19 @@ ofRectangle ofTrueTypeFont::getStringBoundingBox(string c, float x, float y){
     bool bFirstCharacter = true;
 	while(index < len){
 		int cy = (unsigned char)c[index] - NUM_CHARACTER_TO_START;
+
+		//	use p for space character dimensions
+		if (c[index] == ' ' && includeSpaces ) {
+			cy = (int)'p' - NUM_CHARACTER_TO_START;
+		}
+
  	    if (cy < nCharacters){ 			// full char set or not?
 	       if (c[index] == '\n') {
 				yoffset += lineHeight;
 				xoffset = 0 ; //reset X Pos back to zero
-	      } else if (c[index] == ' ') {
-	     		int cy = (int)'p' - NUM_CHARACTER_TO_START;
-				 xoffset += cps[cy].setWidth * letterSpacing * spaceSize;
-				 // zach - this is a bug to fix -- for now, we don't currently deal with ' ' in calculating string bounding box
+	      } else if (c[index] == ' ' && !includeSpaces ) {
+	     		cy = (int)'p' - NUM_CHARACTER_TO_START;
+				xoffset += cps[cy].setWidth * letterSpacing * spaceSize;
 		  } else if(cy > -1){
                 GLint height	= cps[cy].height;
             	GLint bwidth	= cps[cy].width * letterSpacing;
