@@ -60,7 +60,7 @@ public:
 	float 		stringWidth(string s);
 	float 		stringHeight(string s);
 	
-	ofRectangle    getStringBoundingBox(string s, float x, float y,bool includeSpaces=false);
+	ofRectangle    getStringBoundingBox(string s, float x, float y);
 	
 	void 		drawString(string s, float x, float y);
 	void		drawStringAsShapes(string s, float x, float y);
