@@ -78,7 +78,10 @@ class ofxTCPServer : public ofThread{
 		//amount of filled-bytes returned
 		int peekReceiveRawBytes(int clientID, char * receiveBytes,  int numBytes);
 
-
+		bool setReceiveBufferSize(int sizeInByte)	{	return TCPServer.SetReceiveBufferSize(sizeInByte);	}
+		bool setSendBufferSize(int sizeInByte)		{	return TCPServer.SetSendBufferSize(sizeInByte);	}
+		int  getReceiveBufferSize()					{	return TCPServer.GetReceiveBufferSize();	}
+		int  getSendBufferSize()					{	return TCPServer.GetSendBufferSize();	}
 
 	private:
 		// private copy so this can't be copied to avoid problems with destruction

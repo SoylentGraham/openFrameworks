@@ -85,6 +85,7 @@ class ofxTCPClient{
 		//--------------------------
 		bool setup(int _index, bool blocking);
 
+		int  getReceiveBufferSize()		{	return TCPClient.GetReceiveBufferSize();	}
 
 
 private:
